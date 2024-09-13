@@ -22,3 +22,26 @@ Lucas Gomes Monteiro Bassi - 11202020379
 * Avaliador de expressões aritméticas (OK);
 * Inserção de Operadores lógicos (OK);
 * Geração de várias linguagens-alvo: Geração de código Java (OK);
+
+# How to Use
+* Inicie com "programa"
+
+* Para declaração de variáveis: declare_int para inteiros, declare_float para decimais e declare_texto para strings
+
+* Para receber um valor do teclado, "leia(a)."
+
+* Para atribuir um valor, "b := c."
+
+* Para condicionais, if (expr op_rel expr) {bloco}, e para usar else, use o que já foi descrito para o if, adicionando else {bloco}
+
+* Para laços while: while (expr op_rel expr) {bloco}
+                    while (NUM) {bloco}
+                    while (TRUE) {bloco}
+                    while (FALSE) {bloco}
+  
+* Para laços do while:  do {bloco) while (expr op_rel expr).
+                          do {bloco} while (NUM).
+                          do {bloco} while (TRUE).
+                          do {bloco} while (FALSE).
+  
+* Finalize o programa com "fimprog."
