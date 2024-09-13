@@ -32,6 +32,8 @@ Lucas Gomes Monteiro Bassi - 11202020379
 
 * Para atribuir um valor, "b := c."
 
+* Para escrever um valor na tela, "escreva(c)."
+
 * Para condicionais, if (expr op_rel expr) {bloco}, e para usar else, use o que já foi descrito para o if, adicionando else {bloco}
 
 * Para laços while: while (expr op_rel expr) {bloco}
