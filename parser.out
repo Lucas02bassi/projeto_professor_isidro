@@ -1,0 +1,2759 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAMA declara bloco FIMPROG
+Rule 2     declara -> DECLARE_INT lista_ids DOT
+Rule 3     declara -> DECLARE_FLOAT lista_ids DOT
+Rule 4     declara -> DECLARE_TEXTO lista_ids DOT
+Rule 5     lista_ids -> ID
+Rule 6     lista_ids -> lista_ids COMMA ID
+Rule 7     bloco -> comando
+Rule 8     bloco -> bloco comando
+Rule 9     comando -> cmd_leitura
+Rule 10    comando -> cmd_escrita
+Rule 11    comando -> cmd_if
+Rule 12    comando -> cmd_expr
+Rule 13    comando -> cmd_while
+Rule 14    comando -> cmd_break
+Rule 15    comando -> cmd_do_while
+Rule 16    comando -> declara
+Rule 17    cmd_leitura -> LEIA LPAREN ID RPAREN DOT
+Rule 18    cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT
+Rule 19    cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT
+Rule 20    cmd_expr -> ID ASSIGN expr DOT
+Rule 21    cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT
+Rule 22    cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+Rule 23    cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+Rule 24    cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+Rule 25    cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+Rule 26    cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+Rule 27    cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+Rule 28    cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+Rule 29    cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+Rule 30    cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+Rule 31    cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+Rule 32    cmd_break -> BREAK DOT
+Rule 33    op_rel -> LT
+Rule 34    op_rel -> GT
+Rule 35    op_rel -> LE
+Rule 36    op_rel -> GE
+Rule 37    op_rel -> NE
+Rule 38    op_rel -> EQ
+Rule 39    op_rel -> AND
+Rule 40    op_rel -> OR
+Rule 41    op_rel -> NOT
+Rule 42    expr -> expr PLUS termo
+Rule 43    expr -> expr MINUS termo
+Rule 44    expr -> termo
+Rule 45    termo -> termo TIMES fator
+Rule 46    termo -> termo DIVIDE fator
+Rule 47    termo -> fator
+Rule 48    fator -> NUM
+Rule 49    fator -> ID
+Rule 50    fator -> LPAREN expr RPAREN
+Rule 51    fator -> TRUE
+Rule 52    fator -> FALSE
+
+Terminals, with rules where they appear
+
+AND                  : 39
+ASPAS                : 21 21
+ASSIGN               : 20 21
+BREAK                : 32
+COMMA                : 6
+DECLARE_FLOAT        : 3
+DECLARE_INT          : 2
+DECLARE_TEXTO        : 4
+DIVIDE               : 46
+DO                   : 28 29 30 31
+DOT                  : 2 3 4 17 18 19 20 21 28 29 30 31 32
+ELSE                 : 23
+EQ                   : 38
+ESCREVA              : 18 19
+FALSE                : 27 31 52
+FIMPROG              : 1
+GE                   : 36
+GT                   : 34
+ID                   : 5 6 17 19 20 21 21 49
+IF                   : 22 23
+LBRACE               : 22 23 23 24 25 26 27 28 29 30 31
+LE                   : 35
+LEIA                 : 17
+LPAREN               : 17 18 19 22 23 24 25 26 27 28 29 30 31 50
+LT                   : 33
+MINUS                : 43
+NE                   : 37
+NOT                  : 41
+NUM                  : 25 29 48
+OR                   : 40
+PLUS                 : 42
+PROGRAMA             : 1
+RBRACE               : 22 23 23 24 25 26 27 28 29 30 31
+RPAREN               : 17 18 19 22 23 24 25 26 27 28 29 30 31 50
+TEXT                 : 18
+TIMES                : 45
+TRUE                 : 26 30 51
+WHILE                : 24 25 26 27 28 29 30 31
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloco                : 1 8 22 23 23 24 25 26 27 28 29 30 31
+cmd_break            : 14
+cmd_do_while         : 15
+cmd_escrita          : 10
+cmd_expr             : 12
+cmd_if               : 11
+cmd_leitura          : 9
+cmd_while            : 13
+comando              : 7 8
+declara              : 1 16
+expr                 : 20 22 22 23 23 24 24 28 28 42 43 50
+fator                : 45 46 47
+lista_ids            : 2 3 4 6
+op_rel               : 22 23 24 28
+program              : 0
+termo                : 42 43 44 45 46
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAMA declara bloco FIMPROG
+
+    PROGRAMA        shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAMA . declara bloco FIMPROG
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    declara                        shift and go to state 3
+
+state 3
+
+    (1) program -> PROGRAMA declara . bloco FIMPROG
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    declara                        shift and go to state 7
+    bloco                          shift and go to state 8
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+
+state 4
+
+    (2) declara -> DECLARE_INT . lista_ids DOT
+    (5) lista_ids -> . ID
+    (6) lista_ids -> . lista_ids COMMA ID
+
+    ID              shift and go to state 25
+
+    lista_ids                      shift and go to state 24
+
+state 5
+
+    (3) declara -> DECLARE_FLOAT . lista_ids DOT
+    (5) lista_ids -> . ID
+    (6) lista_ids -> . lista_ids COMMA ID
+
+    ID              shift and go to state 25
+
+    lista_ids                      shift and go to state 26
+
+state 6
+
+    (4) declara -> DECLARE_TEXTO . lista_ids DOT
+    (5) lista_ids -> . ID
+    (6) lista_ids -> . lista_ids COMMA ID
+
+    ID              shift and go to state 25
+
+    lista_ids                      shift and go to state 27
+
+state 7
+
+    (16) comando -> declara .
+
+    FIMPROG         reduce using rule 16 (comando -> declara .)
+    LEIA            reduce using rule 16 (comando -> declara .)
+    ESCREVA         reduce using rule 16 (comando -> declara .)
+    IF              reduce using rule 16 (comando -> declara .)
+    ID              reduce using rule 16 (comando -> declara .)
+    WHILE           reduce using rule 16 (comando -> declara .)
+    BREAK           reduce using rule 16 (comando -> declara .)
+    DO              reduce using rule 16 (comando -> declara .)
+    DECLARE_INT     reduce using rule 16 (comando -> declara .)
+    DECLARE_FLOAT   reduce using rule 16 (comando -> declara .)
+    DECLARE_TEXTO   reduce using rule 16 (comando -> declara .)
+    RBRACE          reduce using rule 16 (comando -> declara .)
+
+
+state 8
+
+    (1) program -> PROGRAMA declara bloco . FIMPROG
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    FIMPROG         shift and go to state 28
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    declara                        shift and go to state 7
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+
+state 9
+
+    (7) bloco -> comando .
+
+    FIMPROG         reduce using rule 7 (bloco -> comando .)
+    LEIA            reduce using rule 7 (bloco -> comando .)
+    ESCREVA         reduce using rule 7 (bloco -> comando .)
+    IF              reduce using rule 7 (bloco -> comando .)
+    ID              reduce using rule 7 (bloco -> comando .)
+    WHILE           reduce using rule 7 (bloco -> comando .)
+    BREAK           reduce using rule 7 (bloco -> comando .)
+    DO              reduce using rule 7 (bloco -> comando .)
+    DECLARE_INT     reduce using rule 7 (bloco -> comando .)
+    DECLARE_FLOAT   reduce using rule 7 (bloco -> comando .)
+    DECLARE_TEXTO   reduce using rule 7 (bloco -> comando .)
+    RBRACE          reduce using rule 7 (bloco -> comando .)
+
+
+state 10
+
+    (9) comando -> cmd_leitura .
+
+    FIMPROG         reduce using rule 9 (comando -> cmd_leitura .)
+    LEIA            reduce using rule 9 (comando -> cmd_leitura .)
+    ESCREVA         reduce using rule 9 (comando -> cmd_leitura .)
+    IF              reduce using rule 9 (comando -> cmd_leitura .)
+    ID              reduce using rule 9 (comando -> cmd_leitura .)
+    WHILE           reduce using rule 9 (comando -> cmd_leitura .)
+    BREAK           reduce using rule 9 (comando -> cmd_leitura .)
+    DO              reduce using rule 9 (comando -> cmd_leitura .)
+    DECLARE_INT     reduce using rule 9 (comando -> cmd_leitura .)
+    DECLARE_FLOAT   reduce using rule 9 (comando -> cmd_leitura .)
+    DECLARE_TEXTO   reduce using rule 9 (comando -> cmd_leitura .)
+    RBRACE          reduce using rule 9 (comando -> cmd_leitura .)
+
+
+state 11
+
+    (10) comando -> cmd_escrita .
+
+    FIMPROG         reduce using rule 10 (comando -> cmd_escrita .)
+    LEIA            reduce using rule 10 (comando -> cmd_escrita .)
+    ESCREVA         reduce using rule 10 (comando -> cmd_escrita .)
+    IF              reduce using rule 10 (comando -> cmd_escrita .)
+    ID              reduce using rule 10 (comando -> cmd_escrita .)
+    WHILE           reduce using rule 10 (comando -> cmd_escrita .)
+    BREAK           reduce using rule 10 (comando -> cmd_escrita .)
+    DO              reduce using rule 10 (comando -> cmd_escrita .)
+    DECLARE_INT     reduce using rule 10 (comando -> cmd_escrita .)
+    DECLARE_FLOAT   reduce using rule 10 (comando -> cmd_escrita .)
+    DECLARE_TEXTO   reduce using rule 10 (comando -> cmd_escrita .)
+    RBRACE          reduce using rule 10 (comando -> cmd_escrita .)
+
+
+state 12
+
+    (11) comando -> cmd_if .
+
+    FIMPROG         reduce using rule 11 (comando -> cmd_if .)
+    LEIA            reduce using rule 11 (comando -> cmd_if .)
+    ESCREVA         reduce using rule 11 (comando -> cmd_if .)
+    IF              reduce using rule 11 (comando -> cmd_if .)
+    ID              reduce using rule 11 (comando -> cmd_if .)
+    WHILE           reduce using rule 11 (comando -> cmd_if .)
+    BREAK           reduce using rule 11 (comando -> cmd_if .)
+    DO              reduce using rule 11 (comando -> cmd_if .)
+    DECLARE_INT     reduce using rule 11 (comando -> cmd_if .)
+    DECLARE_FLOAT   reduce using rule 11 (comando -> cmd_if .)
+    DECLARE_TEXTO   reduce using rule 11 (comando -> cmd_if .)
+    RBRACE          reduce using rule 11 (comando -> cmd_if .)
+
+
+state 13
+
+    (12) comando -> cmd_expr .
+
+    FIMPROG         reduce using rule 12 (comando -> cmd_expr .)
+    LEIA            reduce using rule 12 (comando -> cmd_expr .)
+    ESCREVA         reduce using rule 12 (comando -> cmd_expr .)
+    IF              reduce using rule 12 (comando -> cmd_expr .)
+    ID              reduce using rule 12 (comando -> cmd_expr .)
+    WHILE           reduce using rule 12 (comando -> cmd_expr .)
+    BREAK           reduce using rule 12 (comando -> cmd_expr .)
+    DO              reduce using rule 12 (comando -> cmd_expr .)
+    DECLARE_INT     reduce using rule 12 (comando -> cmd_expr .)
+    DECLARE_FLOAT   reduce using rule 12 (comando -> cmd_expr .)
+    DECLARE_TEXTO   reduce using rule 12 (comando -> cmd_expr .)
+    RBRACE          reduce using rule 12 (comando -> cmd_expr .)
+
+
+state 14
+
+    (13) comando -> cmd_while .
+
+    FIMPROG         reduce using rule 13 (comando -> cmd_while .)
+    LEIA            reduce using rule 13 (comando -> cmd_while .)
+    ESCREVA         reduce using rule 13 (comando -> cmd_while .)
+    IF              reduce using rule 13 (comando -> cmd_while .)
+    ID              reduce using rule 13 (comando -> cmd_while .)
+    WHILE           reduce using rule 13 (comando -> cmd_while .)
+    BREAK           reduce using rule 13 (comando -> cmd_while .)
+    DO              reduce using rule 13 (comando -> cmd_while .)
+    DECLARE_INT     reduce using rule 13 (comando -> cmd_while .)
+    DECLARE_FLOAT   reduce using rule 13 (comando -> cmd_while .)
+    DECLARE_TEXTO   reduce using rule 13 (comando -> cmd_while .)
+    RBRACE          reduce using rule 13 (comando -> cmd_while .)
+
+
+state 15
+
+    (14) comando -> cmd_break .
+
+    FIMPROG         reduce using rule 14 (comando -> cmd_break .)
+    LEIA            reduce using rule 14 (comando -> cmd_break .)
+    ESCREVA         reduce using rule 14 (comando -> cmd_break .)
+    IF              reduce using rule 14 (comando -> cmd_break .)
+    ID              reduce using rule 14 (comando -> cmd_break .)
+    WHILE           reduce using rule 14 (comando -> cmd_break .)
+    BREAK           reduce using rule 14 (comando -> cmd_break .)
+    DO              reduce using rule 14 (comando -> cmd_break .)
+    DECLARE_INT     reduce using rule 14 (comando -> cmd_break .)
+    DECLARE_FLOAT   reduce using rule 14 (comando -> cmd_break .)
+    DECLARE_TEXTO   reduce using rule 14 (comando -> cmd_break .)
+    RBRACE          reduce using rule 14 (comando -> cmd_break .)
+
+
+state 16
+
+    (15) comando -> cmd_do_while .
+
+    FIMPROG         reduce using rule 15 (comando -> cmd_do_while .)
+    LEIA            reduce using rule 15 (comando -> cmd_do_while .)
+    ESCREVA         reduce using rule 15 (comando -> cmd_do_while .)
+    IF              reduce using rule 15 (comando -> cmd_do_while .)
+    ID              reduce using rule 15 (comando -> cmd_do_while .)
+    WHILE           reduce using rule 15 (comando -> cmd_do_while .)
+    BREAK           reduce using rule 15 (comando -> cmd_do_while .)
+    DO              reduce using rule 15 (comando -> cmd_do_while .)
+    DECLARE_INT     reduce using rule 15 (comando -> cmd_do_while .)
+    DECLARE_FLOAT   reduce using rule 15 (comando -> cmd_do_while .)
+    DECLARE_TEXTO   reduce using rule 15 (comando -> cmd_do_while .)
+    RBRACE          reduce using rule 15 (comando -> cmd_do_while .)
+
+
+state 17
+
+    (17) cmd_leitura -> LEIA . LPAREN ID RPAREN DOT
+
+    LPAREN          shift and go to state 30
+
+
+state 18
+
+    (20) cmd_expr -> ID . ASSIGN expr DOT
+    (21) cmd_expr -> ID . ASSIGN ASPAS ID ASPAS DOT
+
+    ASSIGN          shift and go to state 31
+
+
+state 19
+
+    (18) cmd_escrita -> ESCREVA . LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> ESCREVA . LPAREN ID RPAREN DOT
+
+    LPAREN          shift and go to state 32
+
+
+state 20
+
+    (22) cmd_if -> IF . LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> IF . LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+
+    LPAREN          shift and go to state 33
+
+
+state 21
+
+    (24) cmd_while -> WHILE . LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> WHILE . LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> WHILE . LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> WHILE . LPAREN FALSE RPAREN LBRACE bloco RBRACE
+
+    LPAREN          shift and go to state 34
+
+
+state 22
+
+    (32) cmd_break -> BREAK . DOT
+
+    DOT             shift and go to state 35
+
+
+state 23
+
+    (28) cmd_do_while -> DO . LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO . LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> DO . LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> DO . LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+
+    LBRACE          shift and go to state 36
+
+
+state 24
+
+    (2) declara -> DECLARE_INT lista_ids . DOT
+    (6) lista_ids -> lista_ids . COMMA ID
+
+    DOT             shift and go to state 37
+    COMMA           shift and go to state 38
+
+
+state 25
+
+    (5) lista_ids -> ID .
+
+    DOT             reduce using rule 5 (lista_ids -> ID .)
+    COMMA           reduce using rule 5 (lista_ids -> ID .)
+
+
+state 26
+
+    (3) declara -> DECLARE_FLOAT lista_ids . DOT
+    (6) lista_ids -> lista_ids . COMMA ID
+
+    DOT             shift and go to state 39
+    COMMA           shift and go to state 38
+
+
+state 27
+
+    (4) declara -> DECLARE_TEXTO lista_ids . DOT
+    (6) lista_ids -> lista_ids . COMMA ID
+
+    DOT             shift and go to state 40
+    COMMA           shift and go to state 38
+
+
+state 28
+
+    (1) program -> PROGRAMA declara bloco FIMPROG .
+
+    $end            reduce using rule 1 (program -> PROGRAMA declara bloco FIMPROG .)
+
+
+state 29
+
+    (8) bloco -> bloco comando .
+
+    FIMPROG         reduce using rule 8 (bloco -> bloco comando .)
+    LEIA            reduce using rule 8 (bloco -> bloco comando .)
+    ESCREVA         reduce using rule 8 (bloco -> bloco comando .)
+    IF              reduce using rule 8 (bloco -> bloco comando .)
+    ID              reduce using rule 8 (bloco -> bloco comando .)
+    WHILE           reduce using rule 8 (bloco -> bloco comando .)
+    BREAK           reduce using rule 8 (bloco -> bloco comando .)
+    DO              reduce using rule 8 (bloco -> bloco comando .)
+    DECLARE_INT     reduce using rule 8 (bloco -> bloco comando .)
+    DECLARE_FLOAT   reduce using rule 8 (bloco -> bloco comando .)
+    DECLARE_TEXTO   reduce using rule 8 (bloco -> bloco comando .)
+    RBRACE          reduce using rule 8 (bloco -> bloco comando .)
+
+
+state 30
+
+    (17) cmd_leitura -> LEIA LPAREN . ID RPAREN DOT
+
+    ID              shift and go to state 41
+
+
+state 31
+
+    (20) cmd_expr -> ID ASSIGN . expr DOT
+    (21) cmd_expr -> ID ASSIGN . ASPAS ID ASPAS DOT
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    ASPAS           shift and go to state 44
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 43
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 32
+
+    (18) cmd_escrita -> ESCREVA LPAREN . TEXT RPAREN DOT
+    (19) cmd_escrita -> ESCREVA LPAREN . ID RPAREN DOT
+
+    TEXT            shift and go to state 51
+    ID              shift and go to state 52
+
+
+state 33
+
+    (22) cmd_if -> IF LPAREN . expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> IF LPAREN . expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 53
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 34
+
+    (24) cmd_while -> WHILE LPAREN . expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> WHILE LPAREN . NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> WHILE LPAREN . TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> WHILE LPAREN . FALSE RPAREN LBRACE bloco RBRACE
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 55
+    TRUE            shift and go to state 56
+    FALSE           shift and go to state 57
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+
+    expr                           shift and go to state 54
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 35
+
+    (32) cmd_break -> BREAK DOT .
+
+    FIMPROG         reduce using rule 32 (cmd_break -> BREAK DOT .)
+    LEIA            reduce using rule 32 (cmd_break -> BREAK DOT .)
+    ESCREVA         reduce using rule 32 (cmd_break -> BREAK DOT .)
+    IF              reduce using rule 32 (cmd_break -> BREAK DOT .)
+    ID              reduce using rule 32 (cmd_break -> BREAK DOT .)
+    WHILE           reduce using rule 32 (cmd_break -> BREAK DOT .)
+    BREAK           reduce using rule 32 (cmd_break -> BREAK DOT .)
+    DO              reduce using rule 32 (cmd_break -> BREAK DOT .)
+    DECLARE_INT     reduce using rule 32 (cmd_break -> BREAK DOT .)
+    DECLARE_FLOAT   reduce using rule 32 (cmd_break -> BREAK DOT .)
+    DECLARE_TEXTO   reduce using rule 32 (cmd_break -> BREAK DOT .)
+    RBRACE          reduce using rule 32 (cmd_break -> BREAK DOT .)
+
+
+state 36
+
+    (28) cmd_do_while -> DO LBRACE . bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO LBRACE . bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> DO LBRACE . bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> DO LBRACE . bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 58
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 37
+
+    (2) declara -> DECLARE_INT lista_ids DOT .
+
+    LEIA            reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    ESCREVA         reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    IF              reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    ID              reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    WHILE           reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    BREAK           reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    DO              reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    DECLARE_INT     reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    DECLARE_FLOAT   reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    DECLARE_TEXTO   reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    FIMPROG         reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+    RBRACE          reduce using rule 2 (declara -> DECLARE_INT lista_ids DOT .)
+
+
+state 38
+
+    (6) lista_ids -> lista_ids COMMA . ID
+
+    ID              shift and go to state 59
+
+
+state 39
+
+    (3) declara -> DECLARE_FLOAT lista_ids DOT .
+
+    LEIA            reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    ESCREVA         reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    IF              reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    ID              reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    WHILE           reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    BREAK           reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    DO              reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    DECLARE_INT     reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    DECLARE_FLOAT   reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    DECLARE_TEXTO   reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    FIMPROG         reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+    RBRACE          reduce using rule 3 (declara -> DECLARE_FLOAT lista_ids DOT .)
+
+
+state 40
+
+    (4) declara -> DECLARE_TEXTO lista_ids DOT .
+
+    LEIA            reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    ESCREVA         reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    IF              reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    ID              reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    WHILE           reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    BREAK           reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    DO              reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    DECLARE_INT     reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    DECLARE_FLOAT   reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    DECLARE_TEXTO   reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    FIMPROG         reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+    RBRACE          reduce using rule 4 (declara -> DECLARE_TEXTO lista_ids DOT .)
+
+
+state 41
+
+    (17) cmd_leitura -> LEIA LPAREN ID . RPAREN DOT
+
+    RPAREN          shift and go to state 60
+
+
+state 42
+
+    (49) fator -> ID .
+
+    TIMES           reduce using rule 49 (fator -> ID .)
+    DIVIDE          reduce using rule 49 (fator -> ID .)
+    DOT             reduce using rule 49 (fator -> ID .)
+    PLUS            reduce using rule 49 (fator -> ID .)
+    MINUS           reduce using rule 49 (fator -> ID .)
+    LT              reduce using rule 49 (fator -> ID .)
+    GT              reduce using rule 49 (fator -> ID .)
+    LE              reduce using rule 49 (fator -> ID .)
+    GE              reduce using rule 49 (fator -> ID .)
+    NE              reduce using rule 49 (fator -> ID .)
+    EQ              reduce using rule 49 (fator -> ID .)
+    AND             reduce using rule 49 (fator -> ID .)
+    OR              reduce using rule 49 (fator -> ID .)
+    NOT             reduce using rule 49 (fator -> ID .)
+    RPAREN          reduce using rule 49 (fator -> ID .)
+
+
+state 43
+
+    (20) cmd_expr -> ID ASSIGN expr . DOT
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+
+    DOT             shift and go to state 61
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 44
+
+    (21) cmd_expr -> ID ASSIGN ASPAS . ID ASPAS DOT
+
+    ID              shift and go to state 64
+
+
+state 45
+
+    (44) expr -> termo .
+    (45) termo -> termo . TIMES fator
+    (46) termo -> termo . DIVIDE fator
+
+    DOT             reduce using rule 44 (expr -> termo .)
+    PLUS            reduce using rule 44 (expr -> termo .)
+    MINUS           reduce using rule 44 (expr -> termo .)
+    LT              reduce using rule 44 (expr -> termo .)
+    GT              reduce using rule 44 (expr -> termo .)
+    LE              reduce using rule 44 (expr -> termo .)
+    GE              reduce using rule 44 (expr -> termo .)
+    NE              reduce using rule 44 (expr -> termo .)
+    EQ              reduce using rule 44 (expr -> termo .)
+    AND             reduce using rule 44 (expr -> termo .)
+    OR              reduce using rule 44 (expr -> termo .)
+    NOT             reduce using rule 44 (expr -> termo .)
+    RPAREN          reduce using rule 44 (expr -> termo .)
+    TIMES           shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+
+state 46
+
+    (47) termo -> fator .
+
+    TIMES           reduce using rule 47 (termo -> fator .)
+    DIVIDE          reduce using rule 47 (termo -> fator .)
+    DOT             reduce using rule 47 (termo -> fator .)
+    PLUS            reduce using rule 47 (termo -> fator .)
+    MINUS           reduce using rule 47 (termo -> fator .)
+    LT              reduce using rule 47 (termo -> fator .)
+    GT              reduce using rule 47 (termo -> fator .)
+    LE              reduce using rule 47 (termo -> fator .)
+    GE              reduce using rule 47 (termo -> fator .)
+    NE              reduce using rule 47 (termo -> fator .)
+    EQ              reduce using rule 47 (termo -> fator .)
+    AND             reduce using rule 47 (termo -> fator .)
+    OR              reduce using rule 47 (termo -> fator .)
+    NOT             reduce using rule 47 (termo -> fator .)
+    RPAREN          reduce using rule 47 (termo -> fator .)
+
+
+state 47
+
+    (48) fator -> NUM .
+
+    TIMES           reduce using rule 48 (fator -> NUM .)
+    DIVIDE          reduce using rule 48 (fator -> NUM .)
+    DOT             reduce using rule 48 (fator -> NUM .)
+    PLUS            reduce using rule 48 (fator -> NUM .)
+    MINUS           reduce using rule 48 (fator -> NUM .)
+    LT              reduce using rule 48 (fator -> NUM .)
+    GT              reduce using rule 48 (fator -> NUM .)
+    LE              reduce using rule 48 (fator -> NUM .)
+    GE              reduce using rule 48 (fator -> NUM .)
+    NE              reduce using rule 48 (fator -> NUM .)
+    EQ              reduce using rule 48 (fator -> NUM .)
+    AND             reduce using rule 48 (fator -> NUM .)
+    OR              reduce using rule 48 (fator -> NUM .)
+    NOT             reduce using rule 48 (fator -> NUM .)
+    RPAREN          reduce using rule 48 (fator -> NUM .)
+
+
+state 48
+
+    (50) fator -> LPAREN . expr RPAREN
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 67
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 49
+
+    (51) fator -> TRUE .
+
+    TIMES           reduce using rule 51 (fator -> TRUE .)
+    DIVIDE          reduce using rule 51 (fator -> TRUE .)
+    DOT             reduce using rule 51 (fator -> TRUE .)
+    PLUS            reduce using rule 51 (fator -> TRUE .)
+    MINUS           reduce using rule 51 (fator -> TRUE .)
+    LT              reduce using rule 51 (fator -> TRUE .)
+    GT              reduce using rule 51 (fator -> TRUE .)
+    LE              reduce using rule 51 (fator -> TRUE .)
+    GE              reduce using rule 51 (fator -> TRUE .)
+    NE              reduce using rule 51 (fator -> TRUE .)
+    EQ              reduce using rule 51 (fator -> TRUE .)
+    AND             reduce using rule 51 (fator -> TRUE .)
+    OR              reduce using rule 51 (fator -> TRUE .)
+    NOT             reduce using rule 51 (fator -> TRUE .)
+    RPAREN          reduce using rule 51 (fator -> TRUE .)
+
+
+state 50
+
+    (52) fator -> FALSE .
+
+    TIMES           reduce using rule 52 (fator -> FALSE .)
+    DIVIDE          reduce using rule 52 (fator -> FALSE .)
+    DOT             reduce using rule 52 (fator -> FALSE .)
+    PLUS            reduce using rule 52 (fator -> FALSE .)
+    MINUS           reduce using rule 52 (fator -> FALSE .)
+    LT              reduce using rule 52 (fator -> FALSE .)
+    GT              reduce using rule 52 (fator -> FALSE .)
+    LE              reduce using rule 52 (fator -> FALSE .)
+    GE              reduce using rule 52 (fator -> FALSE .)
+    NE              reduce using rule 52 (fator -> FALSE .)
+    EQ              reduce using rule 52 (fator -> FALSE .)
+    AND             reduce using rule 52 (fator -> FALSE .)
+    OR              reduce using rule 52 (fator -> FALSE .)
+    NOT             reduce using rule 52 (fator -> FALSE .)
+    RPAREN          reduce using rule 52 (fator -> FALSE .)
+
+
+state 51
+
+    (18) cmd_escrita -> ESCREVA LPAREN TEXT . RPAREN DOT
+
+    RPAREN          shift and go to state 68
+
+
+state 52
+
+    (19) cmd_escrita -> ESCREVA LPAREN ID . RPAREN DOT
+
+    RPAREN          shift and go to state 69
+
+
+state 53
+
+    (22) cmd_if -> IF LPAREN expr . op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> IF LPAREN expr . op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+    (33) op_rel -> . LT
+    (34) op_rel -> . GT
+    (35) op_rel -> . LE
+    (36) op_rel -> . GE
+    (37) op_rel -> . NE
+    (38) op_rel -> . EQ
+    (39) op_rel -> . AND
+    (40) op_rel -> . OR
+    (41) op_rel -> . NOT
+
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    LT              shift and go to state 71
+    GT              shift and go to state 72
+    LE              shift and go to state 73
+    GE              shift and go to state 74
+    NE              shift and go to state 75
+    EQ              shift and go to state 76
+    AND             shift and go to state 77
+    OR              shift and go to state 78
+    NOT             shift and go to state 79
+
+    op_rel                         shift and go to state 70
+
+state 54
+
+    (24) cmd_while -> WHILE LPAREN expr . op_rel expr RPAREN LBRACE bloco RBRACE
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+    (33) op_rel -> . LT
+    (34) op_rel -> . GT
+    (35) op_rel -> . LE
+    (36) op_rel -> . GE
+    (37) op_rel -> . NE
+    (38) op_rel -> . EQ
+    (39) op_rel -> . AND
+    (40) op_rel -> . OR
+    (41) op_rel -> . NOT
+
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    LT              shift and go to state 71
+    GT              shift and go to state 72
+    LE              shift and go to state 73
+    GE              shift and go to state 74
+    NE              shift and go to state 75
+    EQ              shift and go to state 76
+    AND             shift and go to state 77
+    OR              shift and go to state 78
+    NOT             shift and go to state 79
+
+    op_rel                         shift and go to state 80
+
+state 55
+
+    (25) cmd_while -> WHILE LPAREN NUM . RPAREN LBRACE bloco RBRACE
+    (48) fator -> NUM .
+
+    RPAREN          shift and go to state 81
+    TIMES           reduce using rule 48 (fator -> NUM .)
+    DIVIDE          reduce using rule 48 (fator -> NUM .)
+    PLUS            reduce using rule 48 (fator -> NUM .)
+    MINUS           reduce using rule 48 (fator -> NUM .)
+    LT              reduce using rule 48 (fator -> NUM .)
+    GT              reduce using rule 48 (fator -> NUM .)
+    LE              reduce using rule 48 (fator -> NUM .)
+    GE              reduce using rule 48 (fator -> NUM .)
+    NE              reduce using rule 48 (fator -> NUM .)
+    EQ              reduce using rule 48 (fator -> NUM .)
+    AND             reduce using rule 48 (fator -> NUM .)
+    OR              reduce using rule 48 (fator -> NUM .)
+    NOT             reduce using rule 48 (fator -> NUM .)
+
+
+state 56
+
+    (26) cmd_while -> WHILE LPAREN TRUE . RPAREN LBRACE bloco RBRACE
+    (51) fator -> TRUE .
+
+    RPAREN          shift and go to state 82
+    TIMES           reduce using rule 51 (fator -> TRUE .)
+    DIVIDE          reduce using rule 51 (fator -> TRUE .)
+    PLUS            reduce using rule 51 (fator -> TRUE .)
+    MINUS           reduce using rule 51 (fator -> TRUE .)
+    LT              reduce using rule 51 (fator -> TRUE .)
+    GT              reduce using rule 51 (fator -> TRUE .)
+    LE              reduce using rule 51 (fator -> TRUE .)
+    GE              reduce using rule 51 (fator -> TRUE .)
+    NE              reduce using rule 51 (fator -> TRUE .)
+    EQ              reduce using rule 51 (fator -> TRUE .)
+    AND             reduce using rule 51 (fator -> TRUE .)
+    OR              reduce using rule 51 (fator -> TRUE .)
+    NOT             reduce using rule 51 (fator -> TRUE .)
+
+
+state 57
+
+    (27) cmd_while -> WHILE LPAREN FALSE . RPAREN LBRACE bloco RBRACE
+    (52) fator -> FALSE .
+
+    RPAREN          shift and go to state 83
+    TIMES           reduce using rule 52 (fator -> FALSE .)
+    DIVIDE          reduce using rule 52 (fator -> FALSE .)
+    PLUS            reduce using rule 52 (fator -> FALSE .)
+    MINUS           reduce using rule 52 (fator -> FALSE .)
+    LT              reduce using rule 52 (fator -> FALSE .)
+    GT              reduce using rule 52 (fator -> FALSE .)
+    LE              reduce using rule 52 (fator -> FALSE .)
+    GE              reduce using rule 52 (fator -> FALSE .)
+    NE              reduce using rule 52 (fator -> FALSE .)
+    EQ              reduce using rule 52 (fator -> FALSE .)
+    AND             reduce using rule 52 (fator -> FALSE .)
+    OR              reduce using rule 52 (fator -> FALSE .)
+    NOT             reduce using rule 52 (fator -> FALSE .)
+
+
+state 58
+
+    (28) cmd_do_while -> DO LBRACE bloco . RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO LBRACE bloco . RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> DO LBRACE bloco . RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> DO LBRACE bloco . RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 84
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 59
+
+    (6) lista_ids -> lista_ids COMMA ID .
+
+    DOT             reduce using rule 6 (lista_ids -> lista_ids COMMA ID .)
+    COMMA           reduce using rule 6 (lista_ids -> lista_ids COMMA ID .)
+
+
+state 60
+
+    (17) cmd_leitura -> LEIA LPAREN ID RPAREN . DOT
+
+    DOT             shift and go to state 85
+
+
+state 61
+
+    (20) cmd_expr -> ID ASSIGN expr DOT .
+
+    FIMPROG         reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    LEIA            reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    ESCREVA         reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    IF              reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    ID              reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    WHILE           reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    BREAK           reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    DO              reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    DECLARE_INT     reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    DECLARE_FLOAT   reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    DECLARE_TEXTO   reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+    RBRACE          reduce using rule 20 (cmd_expr -> ID ASSIGN expr DOT .)
+
+
+state 62
+
+    (42) expr -> expr PLUS . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    termo                          shift and go to state 86
+    fator                          shift and go to state 46
+
+state 63
+
+    (43) expr -> expr MINUS . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    termo                          shift and go to state 87
+    fator                          shift and go to state 46
+
+state 64
+
+    (21) cmd_expr -> ID ASSIGN ASPAS ID . ASPAS DOT
+
+    ASPAS           shift and go to state 88
+
+
+state 65
+
+    (45) termo -> termo TIMES . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    fator                          shift and go to state 89
+
+state 66
+
+    (46) termo -> termo DIVIDE . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    fator                          shift and go to state 90
+
+state 67
+
+    (50) fator -> LPAREN expr . RPAREN
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+
+    RPAREN          shift and go to state 91
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 68
+
+    (18) cmd_escrita -> ESCREVA LPAREN TEXT RPAREN . DOT
+
+    DOT             shift and go to state 92
+
+
+state 69
+
+    (19) cmd_escrita -> ESCREVA LPAREN ID RPAREN . DOT
+
+    DOT             shift and go to state 93
+
+
+state 70
+
+    (22) cmd_if -> IF LPAREN expr op_rel . expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> IF LPAREN expr op_rel . expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 94
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 71
+
+    (33) op_rel -> LT .
+
+    NUM             reduce using rule 33 (op_rel -> LT .)
+    ID              reduce using rule 33 (op_rel -> LT .)
+    LPAREN          reduce using rule 33 (op_rel -> LT .)
+    TRUE            reduce using rule 33 (op_rel -> LT .)
+    FALSE           reduce using rule 33 (op_rel -> LT .)
+
+
+state 72
+
+    (34) op_rel -> GT .
+
+    NUM             reduce using rule 34 (op_rel -> GT .)
+    ID              reduce using rule 34 (op_rel -> GT .)
+    LPAREN          reduce using rule 34 (op_rel -> GT .)
+    TRUE            reduce using rule 34 (op_rel -> GT .)
+    FALSE           reduce using rule 34 (op_rel -> GT .)
+
+
+state 73
+
+    (35) op_rel -> LE .
+
+    NUM             reduce using rule 35 (op_rel -> LE .)
+    ID              reduce using rule 35 (op_rel -> LE .)
+    LPAREN          reduce using rule 35 (op_rel -> LE .)
+    TRUE            reduce using rule 35 (op_rel -> LE .)
+    FALSE           reduce using rule 35 (op_rel -> LE .)
+
+
+state 74
+
+    (36) op_rel -> GE .
+
+    NUM             reduce using rule 36 (op_rel -> GE .)
+    ID              reduce using rule 36 (op_rel -> GE .)
+    LPAREN          reduce using rule 36 (op_rel -> GE .)
+    TRUE            reduce using rule 36 (op_rel -> GE .)
+    FALSE           reduce using rule 36 (op_rel -> GE .)
+
+
+state 75
+
+    (37) op_rel -> NE .
+
+    NUM             reduce using rule 37 (op_rel -> NE .)
+    ID              reduce using rule 37 (op_rel -> NE .)
+    LPAREN          reduce using rule 37 (op_rel -> NE .)
+    TRUE            reduce using rule 37 (op_rel -> NE .)
+    FALSE           reduce using rule 37 (op_rel -> NE .)
+
+
+state 76
+
+    (38) op_rel -> EQ .
+
+    NUM             reduce using rule 38 (op_rel -> EQ .)
+    ID              reduce using rule 38 (op_rel -> EQ .)
+    LPAREN          reduce using rule 38 (op_rel -> EQ .)
+    TRUE            reduce using rule 38 (op_rel -> EQ .)
+    FALSE           reduce using rule 38 (op_rel -> EQ .)
+
+
+state 77
+
+    (39) op_rel -> AND .
+
+    NUM             reduce using rule 39 (op_rel -> AND .)
+    ID              reduce using rule 39 (op_rel -> AND .)
+    LPAREN          reduce using rule 39 (op_rel -> AND .)
+    TRUE            reduce using rule 39 (op_rel -> AND .)
+    FALSE           reduce using rule 39 (op_rel -> AND .)
+
+
+state 78
+
+    (40) op_rel -> OR .
+
+    NUM             reduce using rule 40 (op_rel -> OR .)
+    ID              reduce using rule 40 (op_rel -> OR .)
+    LPAREN          reduce using rule 40 (op_rel -> OR .)
+    TRUE            reduce using rule 40 (op_rel -> OR .)
+    FALSE           reduce using rule 40 (op_rel -> OR .)
+
+
+state 79
+
+    (41) op_rel -> NOT .
+
+    NUM             reduce using rule 41 (op_rel -> NOT .)
+    ID              reduce using rule 41 (op_rel -> NOT .)
+    LPAREN          reduce using rule 41 (op_rel -> NOT .)
+    TRUE            reduce using rule 41 (op_rel -> NOT .)
+    FALSE           reduce using rule 41 (op_rel -> NOT .)
+
+
+state 80
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel . expr RPAREN LBRACE bloco RBRACE
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 95
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 81
+
+    (25) cmd_while -> WHILE LPAREN NUM RPAREN . LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 96
+
+
+state 82
+
+    (26) cmd_while -> WHILE LPAREN TRUE RPAREN . LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 97
+
+
+state 83
+
+    (27) cmd_while -> WHILE LPAREN FALSE RPAREN . LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 98
+
+
+state 84
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE . WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE . WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE . WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE . WHILE LPAREN FALSE RPAREN DOT
+
+    WHILE           shift and go to state 99
+
+
+state 85
+
+    (17) cmd_leitura -> LEIA LPAREN ID RPAREN DOT .
+
+    FIMPROG         reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    LEIA            reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    ESCREVA         reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    IF              reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    ID              reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    WHILE           reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    BREAK           reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    DO              reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    DECLARE_INT     reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+    RBRACE          reduce using rule 17 (cmd_leitura -> LEIA LPAREN ID RPAREN DOT .)
+
+
+state 86
+
+    (42) expr -> expr PLUS termo .
+    (45) termo -> termo . TIMES fator
+    (46) termo -> termo . DIVIDE fator
+
+    DOT             reduce using rule 42 (expr -> expr PLUS termo .)
+    PLUS            reduce using rule 42 (expr -> expr PLUS termo .)
+    MINUS           reduce using rule 42 (expr -> expr PLUS termo .)
+    LT              reduce using rule 42 (expr -> expr PLUS termo .)
+    GT              reduce using rule 42 (expr -> expr PLUS termo .)
+    LE              reduce using rule 42 (expr -> expr PLUS termo .)
+    GE              reduce using rule 42 (expr -> expr PLUS termo .)
+    NE              reduce using rule 42 (expr -> expr PLUS termo .)
+    EQ              reduce using rule 42 (expr -> expr PLUS termo .)
+    AND             reduce using rule 42 (expr -> expr PLUS termo .)
+    OR              reduce using rule 42 (expr -> expr PLUS termo .)
+    NOT             reduce using rule 42 (expr -> expr PLUS termo .)
+    RPAREN          reduce using rule 42 (expr -> expr PLUS termo .)
+    TIMES           shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+
+state 87
+
+    (43) expr -> expr MINUS termo .
+    (45) termo -> termo . TIMES fator
+    (46) termo -> termo . DIVIDE fator
+
+    DOT             reduce using rule 43 (expr -> expr MINUS termo .)
+    PLUS            reduce using rule 43 (expr -> expr MINUS termo .)
+    MINUS           reduce using rule 43 (expr -> expr MINUS termo .)
+    LT              reduce using rule 43 (expr -> expr MINUS termo .)
+    GT              reduce using rule 43 (expr -> expr MINUS termo .)
+    LE              reduce using rule 43 (expr -> expr MINUS termo .)
+    GE              reduce using rule 43 (expr -> expr MINUS termo .)
+    NE              reduce using rule 43 (expr -> expr MINUS termo .)
+    EQ              reduce using rule 43 (expr -> expr MINUS termo .)
+    AND             reduce using rule 43 (expr -> expr MINUS termo .)
+    OR              reduce using rule 43 (expr -> expr MINUS termo .)
+    NOT             reduce using rule 43 (expr -> expr MINUS termo .)
+    RPAREN          reduce using rule 43 (expr -> expr MINUS termo .)
+    TIMES           shift and go to state 65
+    DIVIDE          shift and go to state 66
+
+
+state 88
+
+    (21) cmd_expr -> ID ASSIGN ASPAS ID ASPAS . DOT
+
+    DOT             shift and go to state 100
+
+
+state 89
+
+    (45) termo -> termo TIMES fator .
+
+    TIMES           reduce using rule 45 (termo -> termo TIMES fator .)
+    DIVIDE          reduce using rule 45 (termo -> termo TIMES fator .)
+    DOT             reduce using rule 45 (termo -> termo TIMES fator .)
+    PLUS            reduce using rule 45 (termo -> termo TIMES fator .)
+    MINUS           reduce using rule 45 (termo -> termo TIMES fator .)
+    LT              reduce using rule 45 (termo -> termo TIMES fator .)
+    GT              reduce using rule 45 (termo -> termo TIMES fator .)
+    LE              reduce using rule 45 (termo -> termo TIMES fator .)
+    GE              reduce using rule 45 (termo -> termo TIMES fator .)
+    NE              reduce using rule 45 (termo -> termo TIMES fator .)
+    EQ              reduce using rule 45 (termo -> termo TIMES fator .)
+    AND             reduce using rule 45 (termo -> termo TIMES fator .)
+    OR              reduce using rule 45 (termo -> termo TIMES fator .)
+    NOT             reduce using rule 45 (termo -> termo TIMES fator .)
+    RPAREN          reduce using rule 45 (termo -> termo TIMES fator .)
+
+
+state 90
+
+    (46) termo -> termo DIVIDE fator .
+
+    TIMES           reduce using rule 46 (termo -> termo DIVIDE fator .)
+    DIVIDE          reduce using rule 46 (termo -> termo DIVIDE fator .)
+    DOT             reduce using rule 46 (termo -> termo DIVIDE fator .)
+    PLUS            reduce using rule 46 (termo -> termo DIVIDE fator .)
+    MINUS           reduce using rule 46 (termo -> termo DIVIDE fator .)
+    LT              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    GT              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    LE              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    GE              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    NE              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    EQ              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    AND             reduce using rule 46 (termo -> termo DIVIDE fator .)
+    OR              reduce using rule 46 (termo -> termo DIVIDE fator .)
+    NOT             reduce using rule 46 (termo -> termo DIVIDE fator .)
+    RPAREN          reduce using rule 46 (termo -> termo DIVIDE fator .)
+
+
+state 91
+
+    (50) fator -> LPAREN expr RPAREN .
+
+    TIMES           reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    DOT             reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    LT              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    GT              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    LE              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    GE              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    NE              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    EQ              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    AND             reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    OR              reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    NOT             reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 50 (fator -> LPAREN expr RPAREN .)
+
+
+state 92
+
+    (18) cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .
+
+    FIMPROG         reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    LEIA            reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    ESCREVA         reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    IF              reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    ID              reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    WHILE           reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    BREAK           reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    DO              reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    DECLARE_INT     reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+    RBRACE          reduce using rule 18 (cmd_escrita -> ESCREVA LPAREN TEXT RPAREN DOT .)
+
+
+state 93
+
+    (19) cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .
+
+    FIMPROG         reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    LEIA            reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    ESCREVA         reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    IF              reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    ID              reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    WHILE           reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    BREAK           reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    DO              reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    DECLARE_INT     reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+    RBRACE          reduce using rule 19 (cmd_escrita -> ESCREVA LPAREN ID RPAREN DOT .)
+
+
+state 94
+
+    (22) cmd_if -> IF LPAREN expr op_rel expr . RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> IF LPAREN expr op_rel expr . RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+
+    RPAREN          shift and go to state 101
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 95
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel expr . RPAREN LBRACE bloco RBRACE
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+
+    RPAREN          shift and go to state 102
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 96
+
+    (25) cmd_while -> WHILE LPAREN NUM RPAREN LBRACE . bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 103
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 97
+
+    (26) cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE . bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 104
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 98
+
+    (27) cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE . bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 105
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 99
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE . LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE WHILE . LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE WHILE . LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE WHILE . LPAREN FALSE RPAREN DOT
+
+    LPAREN          shift and go to state 106
+
+
+state 100
+
+    (21) cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .
+
+    FIMPROG         reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    LEIA            reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    ESCREVA         reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    IF              reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    ID              reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    WHILE           reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    BREAK           reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    DO              reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    DECLARE_INT     reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    DECLARE_FLOAT   reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    DECLARE_TEXTO   reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+    RBRACE          reduce using rule 21 (cmd_expr -> ID ASSIGN ASPAS ID ASPAS DOT .)
+
+
+state 101
+
+    (22) cmd_if -> IF LPAREN expr op_rel expr RPAREN . LBRACE bloco RBRACE
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN . LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 107
+
+
+state 102
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel expr RPAREN . LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 108
+
+
+state 103
+
+    (25) cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco . RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 109
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 104
+
+    (26) cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco . RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 110
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 105
+
+    (27) cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco . RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 111
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 106
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN . expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN . NUM RPAREN DOT
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN . TRUE RPAREN DOT
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN . FALSE RPAREN DOT
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 113
+    TRUE            shift and go to state 114
+    FALSE           shift and go to state 115
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+
+    expr                           shift and go to state 112
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 107
+
+    (22) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE . bloco RBRACE
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE . bloco RBRACE ELSE LBRACE bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 116
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 108
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE . bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 117
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 109
+
+    (25) cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .
+
+    FIMPROG         reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    IF              reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    ID              reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    DO              reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 25 (cmd_while -> WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE .)
+
+
+state 110
+
+    (26) cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .
+
+    FIMPROG         reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    IF              reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    ID              reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    DO              reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 26 (cmd_while -> WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE .)
+
+
+state 111
+
+    (27) cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .
+
+    FIMPROG         reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    IF              reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    ID              reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    DO              reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 27 (cmd_while -> WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE .)
+
+
+state 112
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr . op_rel expr RPAREN DOT
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+    (33) op_rel -> . LT
+    (34) op_rel -> . GT
+    (35) op_rel -> . LE
+    (36) op_rel -> . GE
+    (37) op_rel -> . NE
+    (38) op_rel -> . EQ
+    (39) op_rel -> . AND
+    (40) op_rel -> . OR
+    (41) op_rel -> . NOT
+
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    LT              shift and go to state 71
+    GT              shift and go to state 72
+    LE              shift and go to state 73
+    GE              shift and go to state 74
+    NE              shift and go to state 75
+    EQ              shift and go to state 76
+    AND             shift and go to state 77
+    OR              shift and go to state 78
+    NOT             shift and go to state 79
+
+    op_rel                         shift and go to state 118
+
+state 113
+
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM . RPAREN DOT
+    (48) fator -> NUM .
+
+    RPAREN          shift and go to state 119
+    TIMES           reduce using rule 48 (fator -> NUM .)
+    DIVIDE          reduce using rule 48 (fator -> NUM .)
+    PLUS            reduce using rule 48 (fator -> NUM .)
+    MINUS           reduce using rule 48 (fator -> NUM .)
+    LT              reduce using rule 48 (fator -> NUM .)
+    GT              reduce using rule 48 (fator -> NUM .)
+    LE              reduce using rule 48 (fator -> NUM .)
+    GE              reduce using rule 48 (fator -> NUM .)
+    NE              reduce using rule 48 (fator -> NUM .)
+    EQ              reduce using rule 48 (fator -> NUM .)
+    AND             reduce using rule 48 (fator -> NUM .)
+    OR              reduce using rule 48 (fator -> NUM .)
+    NOT             reduce using rule 48 (fator -> NUM .)
+
+
+state 114
+
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE . RPAREN DOT
+    (51) fator -> TRUE .
+
+    RPAREN          shift and go to state 120
+    TIMES           reduce using rule 51 (fator -> TRUE .)
+    DIVIDE          reduce using rule 51 (fator -> TRUE .)
+    PLUS            reduce using rule 51 (fator -> TRUE .)
+    MINUS           reduce using rule 51 (fator -> TRUE .)
+    LT              reduce using rule 51 (fator -> TRUE .)
+    GT              reduce using rule 51 (fator -> TRUE .)
+    LE              reduce using rule 51 (fator -> TRUE .)
+    GE              reduce using rule 51 (fator -> TRUE .)
+    NE              reduce using rule 51 (fator -> TRUE .)
+    EQ              reduce using rule 51 (fator -> TRUE .)
+    AND             reduce using rule 51 (fator -> TRUE .)
+    OR              reduce using rule 51 (fator -> TRUE .)
+    NOT             reduce using rule 51 (fator -> TRUE .)
+
+
+state 115
+
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE . RPAREN DOT
+    (52) fator -> FALSE .
+
+    RPAREN          shift and go to state 121
+    TIMES           reduce using rule 52 (fator -> FALSE .)
+    DIVIDE          reduce using rule 52 (fator -> FALSE .)
+    PLUS            reduce using rule 52 (fator -> FALSE .)
+    MINUS           reduce using rule 52 (fator -> FALSE .)
+    LT              reduce using rule 52 (fator -> FALSE .)
+    GT              reduce using rule 52 (fator -> FALSE .)
+    LE              reduce using rule 52 (fator -> FALSE .)
+    GE              reduce using rule 52 (fator -> FALSE .)
+    NE              reduce using rule 52 (fator -> FALSE .)
+    EQ              reduce using rule 52 (fator -> FALSE .)
+    AND             reduce using rule 52 (fator -> FALSE .)
+    OR              reduce using rule 52 (fator -> FALSE .)
+    NOT             reduce using rule 52 (fator -> FALSE .)
+
+
+state 116
+
+    (22) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco . RBRACE
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco . RBRACE ELSE LBRACE bloco RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 122
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 117
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco . RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 123
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 118
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel . expr RPAREN DOT
+    (42) expr -> . expr PLUS termo
+    (43) expr -> . expr MINUS termo
+    (44) expr -> . termo
+    (45) termo -> . termo TIMES fator
+    (46) termo -> . termo DIVIDE fator
+    (47) termo -> . fator
+    (48) fator -> . NUM
+    (49) fator -> . ID
+    (50) fator -> . LPAREN expr RPAREN
+    (51) fator -> . TRUE
+    (52) fator -> . FALSE
+
+    NUM             shift and go to state 47
+    ID              shift and go to state 42
+    LPAREN          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    expr                           shift and go to state 124
+    termo                          shift and go to state 45
+    fator                          shift and go to state 46
+
+state 119
+
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN . DOT
+
+    DOT             shift and go to state 125
+
+
+state 120
+
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN . DOT
+
+    DOT             shift and go to state 126
+
+
+state 121
+
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN . DOT
+
+    DOT             shift and go to state 127
+
+
+state 122
+
+    (22) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE . ELSE LBRACE bloco RBRACE
+
+    FIMPROG         reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    IF              reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    ID              reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DO              reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 22 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    ELSE            shift and go to state 128
+
+
+state 123
+
+    (24) cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .
+
+    FIMPROG         reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    IF              reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    ID              reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DO              reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 24 (cmd_while -> WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE .)
+
+
+state 124
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr . RPAREN DOT
+    (42) expr -> expr . PLUS termo
+    (43) expr -> expr . MINUS termo
+
+    RPAREN          shift and go to state 129
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+
+
+state 125
+
+    (29) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .
+
+    FIMPROG         reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    LEIA            reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    ESCREVA         reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    IF              reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    ID              reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    WHILE           reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    BREAK           reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    DO              reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    DECLARE_INT     reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+    RBRACE          reduce using rule 29 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT .)
+
+
+state 126
+
+    (30) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .
+
+    FIMPROG         reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    LEIA            reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    ESCREVA         reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    IF              reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    ID              reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    WHILE           reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    BREAK           reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    DO              reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    DECLARE_INT     reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+    RBRACE          reduce using rule 30 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT .)
+
+
+state 127
+
+    (31) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .
+
+    FIMPROG         reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    LEIA            reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    ESCREVA         reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    IF              reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    ID              reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    WHILE           reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    BREAK           reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    DO              reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    DECLARE_INT     reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+    RBRACE          reduce using rule 31 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT .)
+
+
+state 128
+
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE . LBRACE bloco RBRACE
+
+    LBRACE          shift and go to state 130
+
+
+state 129
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN . DOT
+
+    DOT             shift and go to state 131
+
+
+state 130
+
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE . bloco RBRACE
+    (7) bloco -> . comando
+    (8) bloco -> . bloco comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    bloco                          shift and go to state 132
+    comando                        shift and go to state 9
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 131
+
+    (28) cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .
+
+    FIMPROG         reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    LEIA            reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    ESCREVA         reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    IF              reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    ID              reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    WHILE           reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    BREAK           reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    DO              reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    DECLARE_INT     reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    DECLARE_FLOAT   reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    DECLARE_TEXTO   reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+    RBRACE          reduce using rule 28 (cmd_do_while -> DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT .)
+
+
+state 132
+
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco . RBRACE
+    (8) bloco -> bloco . comando
+    (9) comando -> . cmd_leitura
+    (10) comando -> . cmd_escrita
+    (11) comando -> . cmd_if
+    (12) comando -> . cmd_expr
+    (13) comando -> . cmd_while
+    (14) comando -> . cmd_break
+    (15) comando -> . cmd_do_while
+    (16) comando -> . declara
+    (17) cmd_leitura -> . LEIA LPAREN ID RPAREN DOT
+    (18) cmd_escrita -> . ESCREVA LPAREN TEXT RPAREN DOT
+    (19) cmd_escrita -> . ESCREVA LPAREN ID RPAREN DOT
+    (22) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (23) cmd_if -> . IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE
+    (20) cmd_expr -> . ID ASSIGN expr DOT
+    (21) cmd_expr -> . ID ASSIGN ASPAS ID ASPAS DOT
+    (24) cmd_while -> . WHILE LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE
+    (25) cmd_while -> . WHILE LPAREN NUM RPAREN LBRACE bloco RBRACE
+    (26) cmd_while -> . WHILE LPAREN TRUE RPAREN LBRACE bloco RBRACE
+    (27) cmd_while -> . WHILE LPAREN FALSE RPAREN LBRACE bloco RBRACE
+    (32) cmd_break -> . BREAK DOT
+    (28) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN expr op_rel expr RPAREN DOT
+    (29) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN NUM RPAREN DOT
+    (30) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN TRUE RPAREN DOT
+    (31) cmd_do_while -> . DO LBRACE bloco RBRACE WHILE LPAREN FALSE RPAREN DOT
+    (2) declara -> . DECLARE_INT lista_ids DOT
+    (3) declara -> . DECLARE_FLOAT lista_ids DOT
+    (4) declara -> . DECLARE_TEXTO lista_ids DOT
+
+    RBRACE          shift and go to state 133
+    LEIA            shift and go to state 17
+    ESCREVA         shift and go to state 19
+    IF              shift and go to state 20
+    ID              shift and go to state 18
+    WHILE           shift and go to state 21
+    BREAK           shift and go to state 22
+    DO              shift and go to state 23
+    DECLARE_INT     shift and go to state 4
+    DECLARE_FLOAT   shift and go to state 5
+    DECLARE_TEXTO   shift and go to state 6
+
+    comando                        shift and go to state 29
+    cmd_leitura                    shift and go to state 10
+    cmd_escrita                    shift and go to state 11
+    cmd_if                         shift and go to state 12
+    cmd_expr                       shift and go to state 13
+    cmd_while                      shift and go to state 14
+    cmd_break                      shift and go to state 15
+    cmd_do_while                   shift and go to state 16
+    declara                        shift and go to state 7
+
+state 133
+
+    (23) cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .
+
+    FIMPROG         reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    LEIA            reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    ESCREVA         reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    IF              reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    ID              reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    WHILE           reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    BREAK           reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    DO              reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    DECLARE_INT     reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    DECLARE_FLOAT   reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    DECLARE_TEXTO   reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+    RBRACE          reduce using rule 23 (cmd_if -> IF LPAREN expr op_rel expr RPAREN LBRACE bloco RBRACE ELSE LBRACE bloco RBRACE .)
+

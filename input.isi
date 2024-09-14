@@ -1,0 +1,9 @@
+programa
+declare_int a, c.
+
+a := 2.
+leia(c).
+c := c * a - a.
+escreva(c).
+
+fimprog.
