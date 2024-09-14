@@ -3,6 +3,7 @@
 Lucas Gomes Monteiro Bassi - 11202020379
 
 # Link Youtube:
+https://youtu.be/6H7zlfxjaDw
 
 
 # Checklist:
